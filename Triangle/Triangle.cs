@@ -8,23 +8,52 @@ namespace Triangle
 {
     class Triangle
     {
+        public Edge A { get; }
+        public Edge B { get; }
+        public Edge C { get; }
+
         public Triangle(Point a, Point b, Point c)
         {
-            A = a;
-            B = b;
-            C = c;
+            A = new Edge(a, b);
+            B = new Edge(b, c);
+            C = new Edge(a, c);
         }
-
-        public Point A { get; }
-        public Point B { get; }
-        public Point C { get; }
 
         public double Perimeter 
         { 
             get 
             {
-                return 0;
-            } 
+                return A.Length + B.Length + C.Length;
+            }  
+        }
+
+        public double Area
+        {
+            get
+            {
+                double p = Perimeter / 2;
+                return Math.Sqrt(p*(p-A.Length)*(p-B.Length)*(p-C.Length));
+            }
+        }
+
+        public bool Right
+        {
+            get
+            {
+                return Math.Abs(A.Length - Math.Sqrt(Math.Pow(B.Length, 2) + Math.Pow(C.Length, 2))) < 1e-9 ||
+                       Math.Abs(B.Length - Math.Sqrt(Math.Pow(A.Length, 2) + Math.Pow(C.Length, 2))) < 1e-9 ||
+                       Math.Abs(C.Length - Math.Sqrt(Math.Pow(A.Length, 2) + Math.Pow(B.Length, 2))) < 1e-9;
+            }
+        }
+
+        public bool Isosceles
+        {
+            get
+            {
+                return A.Length == B.Length && A.Length != C.Length ||
+                       B.Length == C.Length && B.Length != A.Length ||
+                       A.Length == C.Length && A.Length != B.Length;
+            }
         }
     }
 }

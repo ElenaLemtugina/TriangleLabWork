@@ -21,7 +21,7 @@ namespace Triangle
         {
             get
             {
-                return 1;
+                return Math.Sqrt((Math.Pow((End.X - Begin.X), 2) + Math.Pow((End.Y - Begin.Y), 2)));
             }
         }
     }
