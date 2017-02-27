@@ -8,14 +8,14 @@ namespace Triangle
 {
     class Edge
     {
+        public readonly Point Begin;
+        public readonly Point End;
+
         public Edge(Point begin, Point end)
         {
             Begin = begin;
             End = end;
         }
-
-        public Point Begin { get; }
-        public Point End { get; }
 
         public double Length
         {

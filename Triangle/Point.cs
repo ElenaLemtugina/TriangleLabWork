@@ -8,12 +8,13 @@ namespace Triangle
 {
     class Point
     {
+        public readonly int Y;
+        public readonly int X;
+
         public Point(int x, int y)
         {
             X = x;
             Y = y;
         }
-        public int Y { get; }
-        public int X { get; }
     }
 }

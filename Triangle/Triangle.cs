@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,15 +9,25 @@ namespace Triangle
 {
     class Triangle
     {
-        public Edge A { get; }
-        public Edge B { get; }
-        public Edge C { get; }
+        public readonly Edge A;
+        public readonly Edge B;
+        public readonly Edge C;
 
         public Triangle(Point a, Point b, Point c)
         {
             A = new Edge(a, b);
             B = new Edge(b, c);
             C = new Edge(a, c);
+            if (Invalid) throw new InvalidDataException("Invalid coordinates. Triangle cannot exists");
+        }
+
+        private bool Invalid
+        {
+            get
+            {
+                return A.Length + B.Length <= C.Length || A.Length + C.Length <= B.Length ||
+                       B.Length + C.Length <= A.Length;
+            }
         }
 
         public double Perimeter 
