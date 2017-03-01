@@ -12,6 +12,9 @@ namespace Triangle
         {
             var myTriangle = new Triangle(new Point(1, 1), new Point(4, 1), new Point(4, 5));
 
+            Polygon nAngles = new Polygon ( new[] { new Point(1, 1), new Point(4, 1), new Point(4, 5) });
+            Console.WriteLine(nAngles.Perimeter + " " + nAngles.Area);
+
             Console.WriteLine("Периметр заданного треугольника = " + myTriangle.Perimeter);
             Console.WriteLine("Площадь заданного треугольника = " + myTriangle.Area);
             Console.WriteLine("Треугольник прямой? " + myTriangle.Right);
