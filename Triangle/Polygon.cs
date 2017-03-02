@@ -8,23 +8,30 @@ namespace Triangle
 {
     class Polygon
     {
-        public readonly Point[] points;
+        public readonly Point[] Points;
+        private Edge[] edges;
 
         public Polygon(Point[] points)
         {
-            this.points = points;            
+            Points = points;
+            CreateEdges();
+        }
+
+        private void CreateEdges()
+        {
+            List<Edge> edgesList = new List<Edge>();
+            for (int i = 0; i<Points.Length - 1; i++)
+            {
+                edgesList.Add(new Edge(Points[i], Points[i + 1]));
+            }
+            edgesList.Add(new Edge(Points[Points.Length - 1], Points[0]));
+            edges = edgesList.ToArray();
         }
 
         public double Perimeter
         {
             get
             {
-                List<Edge> edges = new List<Edge>();
-                for (int i = 0; i < points.Length-1; i++)
-                {
-                    edges.Add(new Edge(points[i], points[i+1]));
-                }
-                edges.Add(new Edge(points[points.Length - 1], points[0]));
                 return edges.Sum(x => x.Length);
             }
         }
@@ -34,9 +41,9 @@ namespace Triangle
             get
             {
                 double sum = 0;
-                for (int i = 0; i < points.Length - 1; i++)
-                    sum += Determinant(points[i], points[i + 1]);
-                sum += Determinant(points[points.Length - 1], points[0]);
+                for (int i = 0; i < Points.Length - 1; i++)
+                    sum += Determinant(Points[i], Points[i + 1]);
+                sum += Determinant(Points[Points.Length - 1], Points[0]);
 
                 return sum * 0.5;
             }
